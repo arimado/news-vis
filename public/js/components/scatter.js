@@ -64,6 +64,8 @@ d3.chart.scatter = function () {
             })
         xAxis(xGroup);
 
+        circles.exit().remove()
+
 
 
     }

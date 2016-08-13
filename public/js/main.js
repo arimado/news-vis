@@ -26,9 +26,11 @@ d3.json("../posts.json", function(err, posts) {
     // SCATTER
 
     var scatterGroup = svg.append("g");
-    var scatter = d3.chart.scatter()
-                          .data(data)
-                          (scatterGroup);
+    var scatter = d3.chart.scatter();
+
+    scatter
+      .data(data)
+      (scatterGroup);
 
     // BRUSH
 
@@ -44,7 +46,11 @@ d3.json("../posts.json", function(err, posts) {
 
     brush.on("filter", function(filtered) {
         console.log('sup', filtered);
-    })
+        scatter.data(filtered);
+        scatter.update();
+    });
+
     
+
 
 })
