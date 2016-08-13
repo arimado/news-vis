@@ -5,7 +5,7 @@ d3.chart.scatter = function () {
     var rootElement,
         data,
         height = 400,
-        width = 800,
+        width = 930,
         dispatch = d3.dispatch(chart, "hover"),
         cx = 10;
 
@@ -38,7 +38,6 @@ d3.chart.scatter = function () {
                              .domain([0, maxScore])
                              .range([height, cx])
 
-
         var xAxis = d3.svg.axis()
                           .scale(createdScale)
                           .ticks(3)
@@ -63,9 +62,6 @@ d3.chart.scatter = function () {
                 cy: function(d, i) { return yScale(d.data.score) },
                 r: 2
             })
-
-
-
         xAxis(xGroup);
 
 

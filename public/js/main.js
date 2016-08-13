@@ -21,13 +21,24 @@ d3.json("../posts.json", function(err, posts) {
 
     // SVG RENDERS -------------------------------------------------------------
 
+    var svg = d3.select("svg")
+
     // SCATTER
 
-    var svg = d3.select("svg")
     var scatterGroup = svg.append("g");
     var scatter = d3.chart.scatter()
                           .data(data)
                           (scatterGroup);
+
+    // BRUSH
+
+    var brushGroup = svg.append("g")
+                        .attr("transform", "translate(100, 430)");
+
+    var brush = d3.chart.brush()
+                        .data(data)
+                        .width(800)
+                        (brushGroup);
 
 
 
