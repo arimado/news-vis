@@ -40,6 +40,8 @@ d3.json("../posts.json", function(err, posts) {
                         .width(800)
                         (brushGroup);
 
+    
+
 
 
 

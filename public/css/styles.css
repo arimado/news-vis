@@ -5,6 +5,10 @@ svg {
     height: 500px;
     border: 1px solid gray;
 }
+
+
+/* SCATTER -----  */
+
 .table {
     width: 960px;
     height: 500px;
@@ -20,6 +24,10 @@ svg {
 .axis .tick line {
     stroke: #000;
 }
+
+/* BRUSH  -----  */
+
+
 
 
 /*  POSTS STYLES */

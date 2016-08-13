@@ -27,6 +27,29 @@ d3.chart.brush = function () {
         var brush = d3.svg.brush()
         brush.x(xScale)
         brush(rootElement);
+
+        rootElement.selectAll("rect").attr("height", height)
+        rootElement.selectAll(".background")
+          .style({fill: "#9e694b", visibility: "visible"})
+        rootElement.selectAll(".extent")
+          .style({fill: "#78C5C5", visibility: "visible"})
+        rootElement.selectAll(".resize rect")
+          .style({fill: "#276C86", visibility: "visible"})
+
+        var rects = rootElement.selectAll('rect.events')
+                               .data(data)
+        rects.enter()
+             .append('rect')
+             .classed('events', true)
+
+        rects.attr({
+                x: function (d) { return xScale(d.data.created);},
+                y: 0,
+                width: 2,
+                height: height
+              })
+              .style('pointer-events', 'none');
+              
     }
 
     chart.data = function ( value ) {
