@@ -21,6 +21,8 @@ d3.chart.posts = function() {
                     .data(data, function (d) { return d.data.id })
         console.log(posts);
 
+        posts.exit().remove();
+        
         var postsContainer = posts.enter();
 
         var postContainer = postsContainer

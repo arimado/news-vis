@@ -48,9 +48,11 @@ d3.json("../posts.json", function(err, posts) {
         console.log('sup', filtered);
         scatter.data(filtered);
         scatter.update();
+        posts.data(filtered);
+        posts.update();
     });
 
-    
+
 
 
 })

@@ -48,7 +48,6 @@ d3.chart.scatter = function () {
                                 .attr("transform", "translate(" + [0,height] + ")")
                                 .transition()
 
-
         var circles = rootElement.selectAll("circle")
                                  .data(data, function(d){ return d.data.id })
 
@@ -65,8 +64,6 @@ d3.chart.scatter = function () {
         xAxis(xGroup);
 
         circles.exit().remove()
-
-
 
     }
 
