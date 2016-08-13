@@ -34,6 +34,11 @@ d3.chart.scatter = function () {
                                   .domain([minCreated, maxCreated])
                                   .range([cx, width]);
 
+        var yScale = d3.scale.linear()
+                             .domain([0, maxScore])
+                             .range([height, cx])
+
+
         var xAxis = d3.svg.axis()
                           .scale(createdScale)
                           .ticks(3)
@@ -55,7 +60,7 @@ d3.chart.scatter = function () {
             .transition()
             .attr({
                 cx: function(d, i) { return createdScale(d.data.created) },
-                cy: function(d, i) { return 10 },
+                cy: function(d, i) { return yScale(d.data.score) },
                 r: 2
             })
 
