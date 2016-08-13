@@ -1,6 +1,6 @@
 if(!d3.chart) d3.chart = {};
 
-d3.chart.table = function() {
+d3.chart.posts = function() {
 
     var rootElement,
         data,
@@ -25,6 +25,7 @@ d3.chart.table = function() {
 
         var postContainer = postsContainer
             .append('div')
+            .classed('post', true);
 
         postContainer
             .append('div')
@@ -45,7 +46,12 @@ d3.chart.table = function() {
         statsContainer
             .append('div')
                 .classed('comments', true)
-                .text(function (d) { return d.data.num_comments })  
+                .text(function (d) { return d.data.num_comments })
+
+        statsContainer
+            .append('div')
+                .classed('source', true)
+                .text(function (d) { return d.data.domain })
 
         // postContainer.asd
 

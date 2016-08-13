@@ -10,11 +10,11 @@ d3.json("../posts.json", function(err, posts) {
 
     // console.log(data);
 
-    var display = d3.select("#display")
-    var tdiv = display.append("div").classed("table", true)
-    var table = d3.chart.table();
-    table.data(data); 
-    table(tdiv);
+    var display = d3.select("#display");
+    var postsElement = display.append("div").classed("posts", true);
+    var posts = d3.chart.posts();
+    posts.data(data);
+    posts(postsElement);
 
 
 })
