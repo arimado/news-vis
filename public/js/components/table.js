@@ -21,11 +21,31 @@ d3.chart.table = function() {
                     .data(data, function (d) { return d.data.id })
         console.log(posts);
 
-        var postsEnter = posts.enter();
+        var postContainer = posts.enter();
 
-        postsEnter.append('p')
-                  .text(function (d) { return d.data.score })
+        postContainer
+            .append('div')
+                .classed('postTitle', true)
+                .append('a')
+                    .attr({ href: function(d) { return d.data.url}})
+                    .text(function (d) { return d.data.title })
 
+        var statsContainer = postContainer
+            .append('div')
+                .classed('stats', true);
+
+        statsContainer
+            .append('div')
+                .classed('score', true)
+                .text(function (d) { return d.data.score });
+
+        statsContainer
+            .append('div')
+                .classed('comments', true)
+                .text(function (d) { return d.data.num_comments })
+
+
+        // postContainer.asd
 
     }
 
