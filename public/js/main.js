@@ -35,15 +35,16 @@ d3.json("../posts.json", function(err, posts) {
     var brushGroup = svg.append("g")
                         .attr("transform", "translate(100, 430)");
 
-    var brush = d3.chart.brush()
-                        .data(data)
-                        .width(800)
-                        (brushGroup);
+    var brush = d3.chart.brush();
 
+    brush
+        .data(data)
+        .width(800)
+        (brushGroup);
+
+    brush.on("filter", function(filtered) {
+        console.log('sup', filtered);
+    })
     
-
-
-
-
 
 })
