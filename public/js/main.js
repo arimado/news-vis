@@ -8,14 +8,13 @@ d3.json("../posts.json", function(err, posts) {
         d.data.created *= 1000;
     })
 
-    console.log(data);
+    // console.log(data);
 
     var display = d3.select("#display")
     var tdiv = display.append("div").classed("table", true)
-    var table = d3.chart.table()
-    table.data(data)
-    console.log(table);
-    table(tdiv)
+    var table = d3.chart.table();
+    table.data(data); 
+    table(tdiv);
 
 
 })
