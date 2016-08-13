@@ -8,13 +8,29 @@ d3.json("../posts.json", function(err, posts) {
         d.data.created *= 1000;
     })
 
-    // console.log(data);
-
     var display = d3.select("#display");
+
+    // DOM RENDERS -------------------------------------------------------------
+
+    // POSTS
+
     var postsElement = display.append("div").classed("posts", true);
     var posts = d3.chart.posts();
     posts.data(data);
     posts(postsElement);
+
+    // SVG RENDERS -------------------------------------------------------------
+
+    // SCATTER
+
+    var svg = d3.select("svg")
+    var scatterGroup = svg.append("g");
+    var scatter = d3.chart.scatter()
+                          .data(data)
+                          (scatterGroup);
+
+
+
 
 
 })
