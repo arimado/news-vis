@@ -21,14 +21,17 @@ d3.chart.table = function() {
                     .data(data, function (d) { return d.data.id })
         console.log(posts);
 
-        var postContainer = posts.enter();
+        var postsContainer = posts.enter();
+
+        var postContainer = postsContainer
+            .append('div')
 
         postContainer
             .append('div')
-                .classed('postTitle', true)
-                .append('a')
-                    .attr({ href: function(d) { return d.data.url}})
-                    .text(function (d) { return d.data.title })
+            .classed('postTitle', true)
+            .append('a')
+                .attr({ href: function(d) {  return d.data.url}})
+                .text(function (d) { return d.data.title })
 
         var statsContainer = postContainer
             .append('div')
@@ -42,8 +45,7 @@ d3.chart.table = function() {
         statsContainer
             .append('div')
                 .classed('comments', true)
-                .text(function (d) { return d.data.num_comments })
-
+                .text(function (d) { return d.data.num_comments })  
 
         // postContainer.asd
 
