@@ -5,7 +5,7 @@ d3.chart.scatter = function () {
     var rootElement,
         data,
         height = 400,
-        width = 500,
+        width = 800,
         dispatch = d3.dispatch(chart, "hover"),
         cx = 10;
 
@@ -43,6 +43,23 @@ d3.chart.scatter = function () {
                                 .classed('axis', true)
                                 .attr("transform", "translate(" + [0,height] + ")")
                                 .transition()
+
+
+        var circles = rootElement.selectAll("circle")
+                                 .data(data, function(d){ return d.data.id })
+
+        circles.enter()
+               .append('circle');
+
+        circles
+            .transition()
+            .attr({
+                cx: function(d, i) { return createdScale(d.data.created) },
+                cy: function(d, i) { return 10 },
+                r: 2
+            })
+
+
 
         xAxis(xGroup);
 
