@@ -45,11 +45,27 @@ d3.chart.brush = function () {
         rects.attr({
                 x: function (d) { return xScale(d.data.created);},
                 y: 0,
-                width: 2,
+                width: 1,
                 height: height
               })
               .style('pointer-events', 'none');
-              
+
+        brush.on("brushend", function() {
+
+            var range = brush.extent(),
+                rangeMin = range[0],
+                rangeMax = range[1]
+
+            var filtered = data.filter(function(d) {
+                var isLargerThanMin = d.data.created > rangeMin;
+                var isSmallerThanMax = d.data.created < rangeMax;
+                return (isLargerThanMin && isSmallerThanMax)
+            })
+
+            console.log('the stuff: ', filtered);
+
+        });
+
     }
 
     chart.data = function ( value ) {
