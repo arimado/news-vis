@@ -78,7 +78,6 @@ d3.chart.scatter = function () {
               .style('fill', 'red');
             dispatch.hover([d]);
         })
-
         circles.on('mouseout', function(d) {
             var node = this; // 'this' -> a reference to the DOM Node
             d3.select(node)
@@ -86,8 +85,6 @@ d3.chart.scatter = function () {
               .style('fill', 'black');
             dispatch.hover([]);
         })
-
-
     }
 
     chart.data = function (value) {
@@ -98,22 +95,24 @@ d3.chart.scatter = function () {
 
     chart.highlight = function ( highlighted ) {
 
-
-
         var circles = rootElement.selectAll('circle')
-
-        console.log('circles: ', circles);
-        console.log('circles select: ', highlighted);
 
         circles.style("fill", "black");
 
-
-        var selected = circles.data(highlighted, function(d) { return d.data.id })
-
-        console.log('selected: ', selected);
+        var selected = circles
+                       .data(highlighted,
+                       function(d) { return d.data.id })
 
         selected.style("fill", "red");
+    }
 
+    chart.width = function ( value ) {
+        if ( arguments.length < 1 ) return width;
+        width = value;
+
+        console.log('current width: ', width);
+
+        return chart;
     }
 
     return d3.rebind(chart, dispatch, "on");

@@ -1,6 +1,10 @@
 console.log('main.js is now loaded')
 
 d3.json("../posts.json", function(err, posts) {
+    init(posts)
+})
+
+var init = function (posts) {
 
     var data = posts.data.children;
 
@@ -25,8 +29,8 @@ d3.json("../posts.json", function(err, posts) {
 
     // SVG RENDERS -------------------------------------------------------------
 
-    var svg = d3.select("svg")
-
+    var svg = d3.select("svg");
+        svg.classed('chart', true);
     // SCATTER
 
     var scatterGroup = svg.append("g");
@@ -39,7 +43,7 @@ d3.json("../posts.json", function(err, posts) {
     // BRUSH
 
     var brushGroup = svg.append("g")
-                        .attr("transform", "translate(100, 430)");
+                        .attr("transform", "translate(0, 430)");
 
     var brush = d3.chart.brush();
 
@@ -70,7 +74,24 @@ d3.json("../posts.json", function(err, posts) {
         scatter.update();
     })
 
-    // posts.highlight();
+    // DOM EVENTS --------------------------------------------------------------
+
+    $(window).resize(function(e) {
+
+        var chartWidth = $('.chart').width();
+        var chartTargetWidth = chartWidth - 50;
+
+        // resize chart
+
+        scatter.width( chartTargetWidth );
+        scatter.update();
+
+        // resize brush
+
+        brush.width( chartTargetWidth );
+        brush.update();
 
 
-})
+    })
+
+}
