@@ -93,9 +93,7 @@ var init = function (posts) {
                 isScrolling = false;
             });
         }
-    })
-
-
+    }) 
 
 
     posts.on('hover', function(hovered) {
