@@ -33,7 +33,7 @@ d3.chart.posts = function() {
 
         postContainer
             .append('div')
-            .classed('postTitle', true)
+            .classed('title', true)
             .append('a')
                 .attr({ href: function(d) {  return d.data.url}})
                 .text(function (d) { return d.data.title })
@@ -42,20 +42,41 @@ d3.chart.posts = function() {
             .append('div')
                 .classed('stats', true);
 
-        statsContainer
+        var scoreContainer = statsContainer
             .append('div')
                 .classed('score', true)
-                .text(function (d) { return d.data.score });
+                .classed('tag', true)
+
+        scoreContainer
+            .append('i')
+
+        scoreContainer
+            .append('span')
+            .text(function (d) { return d.data.score });
 
         statsContainer
             .append('div')
                 .classed('comments', true)
+                .classed('tag', true)
                 .text(function (d) { return d.data.num_comments })
 
-        statsContainer
+        var sourceContainer = postContainer
             .append('div')
                 .classed('source', true)
-                .text(function (d) { return d.data.domain })
+                .classed('tag', true)
+
+
+        // sourceContainer
+        //     .append('i')
+        //     .classed('fa', true)
+        //     .classed('fa-thumbs-up', true)
+
+        sourceContainer
+            .append('span')
+            .text(function (d) { return d.data.domain })
+
+
+
 
         // EVENTS
 
