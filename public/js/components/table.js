@@ -61,6 +61,8 @@ d3.chart.posts = function() {
 
         posts.on('mouseover', function(d) {
             var node = this; // 'this' -> a reference to the DOM Node
+
+
             d3.select(node)
               .transition()
               .style('background-color', 'orange');
@@ -85,9 +87,12 @@ d3.chart.posts = function() {
     chart.highlight = function ( highlighted ) {
 
         var posts = rootElement.selectAll('.post')
-                               .style("background-color", "white");
+
+        posts.transition()
+             .style("background-color", "white");
 
         posts.data(highlighted, function(d) { return d.data.id })
+             .transition()
              .style("background-color", "orange");
     }
 
