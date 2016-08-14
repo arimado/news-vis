@@ -33,7 +33,6 @@ var init = function (posts) {
     //
     var postsElement = display
                        .append("div")
-                       .classed("", true)
                        .classed("posts", true);
 
     var posts = d3.chart.posts();
@@ -70,7 +69,7 @@ var init = function (posts) {
     // D3 EVENTS ---------------------------------------------------------------
 
     brush.on("filter", function(filtered) {
-        console.log('sup', filtered);
+        // console.log('sup', filtered);
         scatter.data(filtered);
         scatter.update();
         posts.data(filtered);
@@ -78,13 +77,29 @@ var init = function (posts) {
     });
 
     scatter.on("hover", function(hovered) {
-        console.log('hovered: ', hovered);
+
         posts.highlight(hovered);
         posts.update();
+
+
+        var isScrolling = false;
+
+        if (hovered.length > 0 && !isScrolling) {
+            isScrolling = true;
+            $('.postsContainer').scrollTop(0)
+            $('.postsContainer').animate({
+                scrollTop: $("#" + hovered[0].data.id).offset().top
+            }, 200, function () {
+                isScrolling = false;
+            });
+        }
     })
 
+
+
+
     posts.on('hover', function(hovered) {
-        console.log('hovered: ', hovered);
+        // console.log('hovered: ', hovered);
         scatter.highlight(hovered);
         scatter.update();
     })

@@ -14,12 +14,12 @@ d3.chart.posts = function() {
     }
 
     chart.update = function () {
-        console.log('update data: ', data);
+        // console.log('update data: ', data);
         var postsContainer = rootElement.select("div.postsContainer");
         var posts = postsContainer
                     .selectAll("div.post")
                     .data(data, function (d) { return d.data.id })
-        console.log(posts);
+        // console.log(posts);
 
         // RENDER POSTS -------
 
@@ -29,7 +29,8 @@ d3.chart.posts = function() {
 
         var postContainer = postsContainer
             .append('div')
-            .classed('post', true);
+            .classed('post', true)
+            .attr({ id: function(d) {  return d.data.id}})
 
         postContainer
             .append('div')
@@ -95,17 +96,18 @@ d3.chart.posts = function() {
 
 
             d3.select(node)
-              .transition()
-              .style('background-color', 'orange');
+            //   .transition()
+              .style('background-color', '#ccc');
             dispatch.hover([d]);
         })
 
         posts.on('mouseout', function(d) {
             var node = this; // 'this' -> a reference to the DOM Node
             d3.select(node)
-              .transition()
+            //   .transition()
               .style('background-color', 'white');
             dispatch.hover([]);
+
         })
 
     }
@@ -119,11 +121,13 @@ d3.chart.posts = function() {
 
         var posts = rootElement.selectAll('.post')
 
-        posts.transition()
+        posts
+            //  .transition()
              .style("background-color", "white");
 
         posts.data(highlighted, function(d) { return d.data.id })
-             .transition()
+            //
+            .transition()
              .style("background-color", "orange");
 
     }

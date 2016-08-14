@@ -44,18 +44,24 @@ svg {
 .posts {
     height: 100%;
     width: 20%;
-    overflow: auto;
+
     /*border-top: 1px solid black;*/
     float: right;
 }
 
 .postsContainer {
+    overflow: auto;
+    border-left: 1px solid #ececec;
+    height: 100%;
+}
 
+.post:last-child {
+    margin-bottom: 2000px;
 }
 
 .post {
     border-bottom: 1px solid #ececec;
-    border-left: 1px solid #ececec;
+
     padding: 20px;
     font-size: 13px;
     overflow: auto;
