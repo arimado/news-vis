@@ -94,6 +94,7 @@ d3.chart.posts = function() {
         posts.data(highlighted, function(d) { return d.data.id })
              .transition()
              .style("background-color", "orange");
+
     }
 
     return d3.rebind(chart, dispatch, "on");

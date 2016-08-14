@@ -82,7 +82,7 @@ d3.chart.scatter = function () {
         circles.on('mouseout', function(d) {
             var node = this; // 'this' -> a reference to the DOM Node
             d3.select(node)
-              .transition() 
+              .transition()
               .style('fill', 'black');
             dispatch.hover([]);
         })
@@ -94,6 +94,26 @@ d3.chart.scatter = function () {
         if(!arguments.length) return data;
         data = value;
         return chart;
+    }
+
+    chart.highlight = function ( highlighted ) {
+
+
+
+        var circles = rootElement.selectAll('circle')
+
+        console.log('circles: ', circles);
+        console.log('circles select: ', highlighted);
+
+        circles.style("fill", "black");
+
+
+        var selected = circles.data(highlighted, function(d) { return d.data.id })
+
+        console.log('selected: ', selected);
+
+        selected.style("fill", "red");
+
     }
 
     return d3.rebind(chart, dispatch, "on");

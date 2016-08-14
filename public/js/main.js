@@ -63,7 +63,13 @@ d3.json("../posts.json", function(err, posts) {
         posts.highlight(hovered);
         posts.update();
     })
-    
+
+    posts.on('hover', function(hovered) {
+        console.log('hovered: ', hovered);
+        scatter.highlight(hovered);
+        scatter.update();
+    })
+
     // posts.highlight();
 
 
