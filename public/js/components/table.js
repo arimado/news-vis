@@ -49,16 +49,26 @@ d3.chart.posts = function() {
 
         scoreContainer
             .append('i')
+            .classed('fa', true)
+            .classed('fa-thumbs-up', true);
 
         scoreContainer
             .append('span')
             .text(function (d) { return d.data.score });
 
-        statsContainer
+        var commentsContainer = statsContainer
             .append('div')
                 .classed('comments', true)
                 .classed('tag', true)
-                .text(function (d) { return d.data.num_comments })
+
+        commentsContainer
+            .append('i')
+            .classed('fa', true)
+            .classed('fa-commenting', true);
+
+        commentsContainer
+            .append('span')
+            .text(function (d) { return d.data.num_comments })
 
         var sourceContainer = postContainer
             .append('div')
