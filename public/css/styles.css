@@ -53,6 +53,7 @@ svg {
 
 .post {
     border-bottom: 1px solid #ececec;
+    border-left: 1px solid #ececec;
     padding: 20px;
     font-size: 13px;
     overflow: auto;

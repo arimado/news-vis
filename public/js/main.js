@@ -1,8 +1,21 @@
-console.log('main.js is now loaded')
+
+var chartOffsetWidth = -20;
+var scatterOffsetHeight = -70;
+var brushOffsetTranslate = -50;
 
 d3.json("../posts.json", function(err, posts) {
     init(posts)
 })
+
+var getHeight = function (offset) {
+    var offset = offset || 0;
+    return $('.chart').height() + offset;
+}
+
+var getWidth = function (offset) {
+    var offset = offset || 0;
+    return $('.chart').width() + offset;
+}
 
 var init = function (posts) {
 
@@ -38,18 +51,20 @@ var init = function (posts) {
 
     scatter
       .data(data)
+      .width(getWidth(chartOffsetWidth))
+      .height(getHeight(scatterOffsetHeight))
       (scatterGroup);
 
     // BRUSH
 
     var brushGroup = svg.append("g")
-                        .attr("transform", "translate(0, 430)");
+                        .attr("transform", "translate(0, " + getHeight(brushOffsetTranslate) + ")");
 
     var brush = d3.chart.brush();
 
     brush
         .data(data)
-        .width(800)
+        .width(getWidth(chartOffsetWidth))
         (brushGroup);
 
     // D3 EVENTS ---------------------------------------------------------------
@@ -78,16 +93,11 @@ var init = function (posts) {
 
     $(window).resize(function(e) {
 
-        var chartWidth  = $('.chart').width();
-        var chartHeight = $('.chart').height();
-
-        var chartTargetWidth = chartWidth - 20;
-
-
+        var chartTargetWidth = getWidth(chartOffsetWidth);
 
         // resize scatter
 
-        var scatterTargetHeight = chartHeight - 70;
+        var scatterTargetHeight = getHeight(scatterOffsetHeight);
         scatter.width( chartTargetWidth );
         scatter.height( scatterTargetHeight );
         scatter.update();
@@ -96,12 +106,12 @@ var init = function (posts) {
 
         // .attr("transform", "translate(0, 430)");
 
-        var brushYTranslate = chartHeight - 50;
+        var brushYTranslate = getHeight(brushOffsetTranslate);
 
         brush.width( chartTargetWidth );
 
         brushGroup.transition()
-                  .attr("transform", "translate(0, " + brushYTranslate + ")");
+                  .attr("transform", "translate(10, " + brushYTranslate + ")");
 
         brush.update();
 
