@@ -58,7 +58,7 @@ var init = function (posts) {
     // BRUSH
 
     var brushGroup = svg.append("g")
-                        .attr("transform", "translate(0, " + getHeight(brushOffsetTranslate) + ")");
+                        .attr("transform", "translate(10, " + getHeight(brushOffsetTranslate) + ")");
 
     var brush = d3.chart.brush();
 

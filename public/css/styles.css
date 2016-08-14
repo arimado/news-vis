@@ -34,8 +34,10 @@ svg {
 
 /* BRUSH  -----  */
 
-
-
+.brush .background {
+    fill: "#9e694b";
+    visibility: "visible";
+}
 
 /*  POSTS STYLES */
 

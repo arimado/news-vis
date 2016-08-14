@@ -26,11 +26,14 @@ d3.chart.brush = function () {
 
         var brush = d3.svg.brush()
         brush.x(xScale)
+
         brush(rootElement);
+
+        rootElement.classed('brush', true);
 
         rootElement.selectAll("rect").attr("height", height)
         rootElement.selectAll(".background")
-          .style({fill: "#9e694b", visibility: "visible"})
+          .style({fill: "white", visibility: "visible"})
         rootElement.selectAll(".extent")
           .style({fill: "#78C5C5", visibility: "visible"})
         rootElement.selectAll(".resize rect")
@@ -48,7 +51,8 @@ d3.chart.brush = function () {
                 width: 1,
                 height: height
               })
-              .style('pointer-events', 'none');
+              .style({'pointer-events': 'none',
+                      'fill': 'grey'});
 
         brush.on("brushend", function() {
 
@@ -59,7 +63,7 @@ d3.chart.brush = function () {
             var filtered = data.filter(function(d) {
                 var isLargerThanMin = d.data.created > rangeMin;
                 var isSmallerThanMax = d.data.created < rangeMax;
-                return (isLargerThanMin && isSmallerThanMax) 
+                return (isLargerThanMin && isSmallerThanMax)
             })
 
             dispatch.filter(filtered);
