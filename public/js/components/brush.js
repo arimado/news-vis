@@ -59,7 +59,7 @@ d3.chart.brush = function () {
             var filtered = data.filter(function(d) {
                 var isLargerThanMin = d.data.created > rangeMin;
                 var isSmallerThanMax = d.data.created < rangeMax;
-                return (isLargerThanMin && isSmallerThanMax)
+                return (isLargerThanMin && isSmallerThanMax) 
             })
 
             dispatch.filter(filtered);

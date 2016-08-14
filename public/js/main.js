@@ -14,7 +14,11 @@ d3.json("../posts.json", function(err, posts) {
 
     // POSTS
     //
-    var postsElement = display.append("div").classed("posts", true);
+    var postsElement = display
+                       .append("div")
+                       .classed("", true)
+                       .classed("posts", true);
+
     var posts = d3.chart.posts();
     posts.data(data);
     posts(postsElement);

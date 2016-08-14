@@ -22,7 +22,7 @@ d3.chart.posts = function() {
         console.log(posts);
 
         posts.exit().remove();
-        
+
         var postsContainer = posts.enter();
 
         var postContainer = postsContainer
@@ -62,6 +62,11 @@ d3.chart.posts = function() {
     chart.data = function ( value ) {
         data = value;
         return chart;
+    }
+
+    chart.highlight = function () {
+        var posts = rootElement.selectAll('div.post');
+        console.log(posts);
     }
 
     return d3.rebind(chart, dispatch, "on");
