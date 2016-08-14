@@ -38,7 +38,7 @@ d3.chart.scatter = function () {
 
         var commentScale = d3.scale.linear()
                                    .domain(d3.extent(data, function(d) {return d.data.num_comments}))
-                                   .range([.3, 1])
+                                   .range([3, 20])
 
         var yScale = d3.scale.linear()
                              .domain([0, maxScore])
@@ -67,7 +67,7 @@ d3.chart.scatter = function () {
             .attr({
                 cx: function(d, i) { return createdScale(d.data.created) },
                 cy: function(d, i) { return yScale(d.data.score) },
-                r: 6
+                r: function(d, i) { return commentScale(d.data.num_comments) }
             })
             .style("fill", "white")
             .style("stroke", "black")
@@ -83,14 +83,19 @@ d3.chart.scatter = function () {
             var node = this; // 'this' -> a reference to the DOM Node
             d3.select(node)
               .transition()
-              .style('fill', 'red');
+              .style("fill", "black")
+              .style("stroke", "none")
+              .style("stroke-width", "0");
             dispatch.hover([d]);
         })
+
         circles.on('mouseout', function(d) {
             var node = this; // 'this' -> a reference to the DOM Node
             d3.select(node)
               .transition()
-              .style('fill', 'black');
+              .style("fill", "white")
+              .style("stroke", "black")
+              .style("stroke-width", "2")
             dispatch.hover([]);
         })
     }

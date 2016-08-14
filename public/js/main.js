@@ -3,8 +3,8 @@ var chartOffsetWidth = -20;
 var scatterOffsetHeight = -70;
 var brushOffsetTranslate = -50;
 
-// d3.json("https://www.reddit.com/r/worldnews.json", function(err, posts) {
-d3.json("../posts.json", function(err, posts) {
+d3.json("https://www.reddit.com/r/worldnews.json", function(err, posts) {
+// d3.json("../posts.json", function(err, posts) {
     init(posts)
 })
 
@@ -70,11 +70,13 @@ var init = function (posts) {
     // D3 EVENTS ---------------------------------------------------------------
 
     brush.on("filter", function(filtered) {
+
         // console.log('sup', filtered);
         scatter.data(filtered);
         scatter.update();
         posts.data(filtered);
         posts.update();
+        $('.postsContainer').scrollTop(0)
     });
 
     scatter.on("hover", function(hovered) {
