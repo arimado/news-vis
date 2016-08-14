@@ -57,7 +57,23 @@ d3.chart.posts = function() {
                 .classed('source', true)
                 .text(function (d) { return d.data.domain })
 
-        // postContainer.asd
+        // EVENTS
+
+        posts.on('mouseover', function(d) {
+            var node = this; // 'this' -> a reference to the DOM Node
+            d3.select(node)
+              .transition()
+              .style('background-color', 'orange');
+            dispatch.hover([d]);
+        })
+
+        posts.on('mouseout', function(d) {
+            var node = this; // 'this' -> a reference to the DOM Node
+            d3.select(node)
+              .transition()
+              .style('background-color', 'white');
+            dispatch.hover([]);
+        })
 
     }
 
@@ -67,7 +83,10 @@ d3.chart.posts = function() {
     }
 
     chart.highlight = function ( highlighted ) {
-        var posts = rootElement.selectAll('.post');
+
+        var posts = rootElement.selectAll('.post')
+                               .style("background-color", "white");
+
         posts.data(highlighted, function(d) { return d.data.id })
              .style("background-color", "orange");
     }

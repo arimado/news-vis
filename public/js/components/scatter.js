@@ -63,7 +63,7 @@ d3.chart.scatter = function () {
             .attr({
                 cx: function(d, i) { return createdScale(d.data.created) },
                 cy: function(d, i) { return yScale(d.data.score) },
-                r: 2
+                r: 4
             })
         xAxis(xGroup);
 
@@ -72,15 +72,20 @@ d3.chart.scatter = function () {
         // Event handlers for circles --------
 
         circles.on('mouseover', function(d) {
-
             var node = this; // 'this' -> a reference to the DOM Node
-
-            d3.select(this).style('stroke', 'black');
+            d3.select(node)
+              .transition()
+              .style('fill', 'red');
             dispatch.hover([d]);
-            
         })
 
-
+        circles.on('mouseout', function(d) {
+            var node = this; // 'this' -> a reference to the DOM Node
+            d3.select(node)
+              .transition() 
+              .style('fill', 'black');
+            dispatch.hover([]);
+        })
 
 
     }

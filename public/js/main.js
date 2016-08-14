@@ -60,8 +60,10 @@ d3.json("../posts.json", function(err, posts) {
 
     scatter.on("hover", function(hovered) {
         console.log('hovered: ', hovered);
+        posts.highlight(hovered);
+        posts.update();
     })
-
+    
     // posts.highlight();
 
 
