@@ -26,6 +26,8 @@ d3.chart.scatter = function () {
 
     chart.update = function () {
 
+        // Initialise Scale  --------
+
         var maxCreated = d3.max(data, function(d) { return d.data.created });
         var minCreated = d3.min(data, function(d) { return d.data.created });
         var maxScore = d3.max(data, function(d) { return d.data.score });
@@ -37,6 +39,8 @@ d3.chart.scatter = function () {
         var yScale = d3.scale.linear()
                              .domain([0, maxScore])
                              .range([height, cx])
+
+        // RENDER ELEMENTS  --------
 
         var xAxis = d3.svg.axis()
                           .scale(createdScale)
@@ -64,6 +68,20 @@ d3.chart.scatter = function () {
         xAxis(xGroup);
 
         circles.exit().remove()
+
+        // Event handlers for circles --------
+
+        circles.on('mouseover', function(d) {
+
+            var node = this; // 'this' -> a reference to the DOM Node
+
+            d3.select(this).style('stroke', 'black');
+            dispatch.hover([d]);
+            
+        })
+
+
+
 
     }
 

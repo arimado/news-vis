@@ -21,6 +21,8 @@ d3.chart.posts = function() {
                     .data(data, function (d) { return d.data.id })
         console.log(posts);
 
+        // RENDER POSTS -------
+
         posts.exit().remove();
 
         var postsContainer = posts.enter();
@@ -64,9 +66,10 @@ d3.chart.posts = function() {
         return chart;
     }
 
-    chart.highlight = function () {
-        var posts = rootElement.selectAll('div.post');
-        console.log(posts);
+    chart.highlight = function ( highlighted ) {
+        var posts = rootElement.selectAll('.post');
+        posts.data(highlighted, function(d) { return d.data.id })
+             .style("background-color", "orange");
     }
 
     return d3.rebind(chart, dispatch, "on");

@@ -48,6 +48,8 @@ d3.json("../posts.json", function(err, posts) {
         .width(800)
         (brushGroup);
 
+    // D3 EVENTS ---------------------------------------------------------------
+
     brush.on("filter", function(filtered) {
         console.log('sup', filtered);
         scatter.data(filtered);
@@ -56,7 +58,11 @@ d3.json("../posts.json", function(err, posts) {
         posts.update();
     });
 
+    scatter.on("hover", function(hovered) {
+        console.log('hovered: ', hovered);
+    })
 
+    // posts.highlight();
 
 
 })
