@@ -109,9 +109,12 @@ d3.chart.scatter = function () {
     chart.width = function ( value ) {
         if ( arguments.length < 1 ) return width;
         width = value;
+        return chart;
+    }
 
-        console.log('current width: ', width);
-
+    chart.height = function ( value ) {
+        if ( arguments.length < 1 ) return height;
+        height = value;
         return chart;
     }
 

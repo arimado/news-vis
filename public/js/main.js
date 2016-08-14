@@ -78,17 +78,31 @@ var init = function (posts) {
 
     $(window).resize(function(e) {
 
-        var chartWidth = $('.chart').width();
-        var chartTargetWidth = chartWidth - 50;
+        var chartWidth  = $('.chart').width();
+        var chartHeight = $('.chart').height();
 
-        // resize chart
+        var chartTargetWidth = chartWidth - 20;
 
+
+
+        // resize scatter
+
+        var scatterTargetHeight = chartHeight - 70;
         scatter.width( chartTargetWidth );
+        scatter.height( scatterTargetHeight );
         scatter.update();
 
         // resize brush
 
+        // .attr("transform", "translate(0, 430)");
+
+        var brushYTranslate = chartHeight - 50;
+
         brush.width( chartTargetWidth );
+
+        brushGroup.transition()
+                  .attr("transform", "translate(0, " + brushYTranslate + ")");
+
         brush.update();
 
 
