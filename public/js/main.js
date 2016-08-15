@@ -3,6 +3,7 @@ var chartOffsetWidth = -20;
 var scatterOffsetHeight = -70;
 var brushOffsetTranslate = -50;
 
+
 d3.json("https://www.reddit.com/r/worldnews.json", function(err, posts) {
 // d3.json("../posts.json", function(err, posts) {
     init(posts)
@@ -153,3 +154,19 @@ var init = function (posts) {
     })
 
 }
+
+
+$(document).ready(function(){ // -----------------------------------------------
+
+
+$('#refresh').on('click', function() {
+    console.log('what')
+    d3.json("https://www.reddit.com/r/worldnews.json", function(err, posts) {
+        console.log(posts);
+        init(posts)
+    })
+})
+
+
+
+}) // --------------------------------------------------------------------------
