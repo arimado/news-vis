@@ -9,11 +9,16 @@ d3.chart.posts = function() {
 
     var chart = function (element) {
         rootElement = element;
-        element.append("div").classed("postsContainer", true);
+
+        rootElement.append("div")
+                   .classed("postsContainer", true);
+
         chart.update();
     }
 
     chart.update = function () {
+
+    
         // console.log('update data: ', data);
         var postsContainer = rootElement.select("div.postsContainer");
         var posts = postsContainer

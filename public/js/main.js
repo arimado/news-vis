@@ -31,10 +31,12 @@ var init = function (posts) {
     // DOM RENDERS -------------------------------------------------------------
 
     // POSTS
-    //
-    var postsElement = display
-                       .append("div")
-                       .classed("posts", true);
+    
+    var postsElement = display.append("div")
+                              .classed("posts", true);
+
+        postsElement.append("div")
+                    .classed("dashboard", true)
 
     var posts = d3.chart.posts();
     posts.data(data);
@@ -105,6 +107,9 @@ var init = function (posts) {
         scatter.update();
     })
 
+    // JQUERY stuff ------------------------------------------------------------
+
+    $('.dashboard').html($('#dashboard_content').html())
     // DOM EVENTS --------------------------------------------------------------
 
     $(window).resize(function(e) {

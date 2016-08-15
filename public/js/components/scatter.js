@@ -12,8 +12,6 @@ d3.chart.scatter = function () {
     var chart = function (element) {
         rootElement = element;
 
-        rootElement = element;
-
         rootElement.append("g")
                    .classed('xAxis', true);
 
