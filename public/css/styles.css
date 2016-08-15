@@ -43,6 +43,7 @@ svg {
 
 .dashboard {
     border-left: 1px solid #ececec;
+    background-color: white;
 }
 
 .dashboard ul {
@@ -88,7 +89,6 @@ svg {
 .posts {
     height: 100%;
     width: 20%;
-
     /*border-top: 1px solid black;*/
     float: right;
 }
@@ -97,6 +97,10 @@ svg {
     overflow: auto;
     border-left: 1px solid #ececec;
     height: 100%;
+}
+
+.post:first-child {
+    /*margin-top: 50px;*/
 }
 
 .post:last-child {

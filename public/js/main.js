@@ -31,7 +31,7 @@ var init = function (posts) {
     // DOM RENDERS -------------------------------------------------------------
 
     // POSTS
-    
+
     var postsElement = display.append("div")
                               .classed("posts", true);
 
@@ -93,7 +93,7 @@ var init = function (posts) {
             isScrolling = true;
             $('.postsContainer').scrollTop(0)
             $('.postsContainer').animate({
-                scrollTop: $("#" + hovered[0].data.id).offset().top
+                scrollTop: $("#" + hovered[0].data.id).offset().top - 50
             }, 200, function () {
                 isScrolling = false;
             });
@@ -110,6 +110,12 @@ var init = function (posts) {
     // JQUERY stuff ------------------------------------------------------------
 
     $('.dashboard').html($('#dashboard_content').html())
+
+    var dashHeight = $('.dashboard').height();
+    var postHeight = $('.posts').height();
+    $('.posts').height(postHeight - dashHeight);
+
+
     // DOM EVENTS --------------------------------------------------------------
 
     $(window).resize(function(e) {
@@ -135,6 +141,13 @@ var init = function (posts) {
                   .attr("transform", "translate(10, " + brushYTranslate + ")");
 
         brush.update();
+
+        // resize posts
+
+        var dashHeight = $('.dashboard').height();
+        var postHeight = $('.posts').height();
+        $('.posts').height(postHeight - dashHeight);
+
 
 
     })
