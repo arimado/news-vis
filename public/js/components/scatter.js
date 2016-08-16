@@ -106,48 +106,54 @@ d3.chart.scatter = function () {
 
     chart.highlight = function ( highlighted ) {
 
+        console.log(highlighted);
+
         var circles = rootElement.selectAll('circle')
 
-            circles
-                .style("fill", "white")
-                .style("stroke", "black")
-                .style("stroke-width", "2")
+        circles
+            .interrupt()
+            .transition()
+            .style("fill", "white")
+            .style("stroke", "black")
+            .style("stroke-width", "2")
 
 
         var selected = circles
                        .data(highlighted, function(d) { return d.data.id })
+                       .interrupt()
+                       .transition()
                        .style("fill", "red")
                     //    .style("stroke", "none")
                     //    .style("stroke-width", "0");
+
+
+        // rootElement.append('ellipse')
+        //            .attr({
+        //                cx: 50,
+        //                cy: 50,
+        //                rx: 20,
+        //                ry: 20,
+        //                r: 40,
+        //            })
+        //            .style('fill', 'blue');
 
 
 
 
         /// draw another circle at a particular point
 
-        if (selected[0][0] !== undefined) {
+        // highlightedCircle.enter()
+        //                  .append('ellipse')
+        //                  .attr({
+        //                      cx: selected[0][0].getAttribute('cx') ,
+        //                      cy: selected[0][0].getAttribute('cy') ,
+        //                      rx: 10 ,
+        //                      ry: 10 ,
+        //                      r: 20
+        //                  })
+        //                  .style('fill', 'blue');
 
-            var highlightedCircle = rootElement.selectAll("ellipse")
 
-            if (highlightedCircle[0].length < 1) return;
-            
-            highlightedCircle.data([1])
-
-            debugger;
-
-            // highlightedCircle.enter()
-            //                  .append('ellipse')
-            //                  .attr({
-            //                      cx: selected[0][0].getAttribute('cx') ,
-            //                      cy: selected[0][0].getAttribute('cy') ,
-            //                      rx: 10 ,
-            //                      ry: 10 ,
-            //                      r: 20
-            //                  })
-            //                  .style('fill', 'blue');
-
-            console.log(highlightedCircle);
-        }
 
     }
 
