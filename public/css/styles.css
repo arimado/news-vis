@@ -113,22 +113,22 @@ svg {
     height: 100%;
 }
 
-.post:first-child {
+.postsContainer > div:first-child {
     /*margin-top: 50px;*/
 }
 
-.post:last-child {
+.postsContainer > div:last-child {
     margin-bottom: 2000px;
 }
 
-.post {
+.postsContainer > div {
     border-bottom: 1px solid #ececec;
 
     padding: 20px;
     font-size: 13px;
     overflow: auto;
 }
-.post .tag {
+.postsContainer > div .tag {
     background: #ccc;
     margin-right: 10px;
     padding: 4px;
@@ -137,30 +137,30 @@ svg {
 
 }
 
-.post .title {
+.postsContainer > div .title {
     margin-bottom: 10px;
 }
 
-.post .title a {
+.postsContainer > div .title a {
     color: black;
     text-decoration: none;
     font-size: 16px;
     line-height: 1.5em;
 }
 
-.post .stats {
+.postsContainer > div .stats {
 
 }
 
-.post .stats .tag {
+.postsContainer > div .stats .tag {
  display: inline-block;
 }
 
-.post .source {
+.postsContainer > div .source {
     float: left;
 }
 
 
-.post span {
+.postsContainer > div span {
     margin-left: 3px;
 }

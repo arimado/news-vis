@@ -109,7 +109,13 @@ d3.chart.posts = function() {
               .append('div')
               .classed('postSource', true)
               .attr({ id: function(d) {  return d.data.id }})
-              .text('child');
+
+        sourceContainer
+          .append('div')
+          .classed('title', true)
+          .append('a')
+              .attr({ href: '#'})
+              .text(function (d) { return d.data.domain })
 
         // sourcesContainer
         //     .append('div')

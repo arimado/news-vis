@@ -179,16 +179,14 @@ var init = function (posts) {
     })
 
     $('#postsFilter').on('click', function() {
-        // console.log('posts');
         if (J.getProp('filter') === 'posts') return;
-        J.setProp('filter', 'posts')
+        J.setProp('filter', 'posts');
         setFilter();
     })
 
     $('#sourcesFilter').on('click', function() {
-        // console.log('sources')
         if (J.getProp('filter') === 'sources') return;
-        J.setProp('filter', 'sources')
+        J.setProp('filter', 'sources');
         setFilter();
     })
 }
