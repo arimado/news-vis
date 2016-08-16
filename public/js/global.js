@@ -4,7 +4,8 @@ var state = {
     page: null,
     filter: 'posts',
     isFetching: true,
-    isRefreshing: true
+    isRefreshing: true,
+    next: null
 }
 
 var J = {

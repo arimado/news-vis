@@ -89,7 +89,7 @@ svg {
     text-align: center;
 }
 
-.dashboard #postsFilter a {
+.dashboard #postsFilter {
     background-color: rgb(244, 242, 246);
 }
 

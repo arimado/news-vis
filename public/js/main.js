@@ -4,8 +4,11 @@ var brushOffsetTranslate = -50;
 
 d3.json("https://www.reddit.com/r/worldnews.json", function(err, posts) {
 // d3.json("../posts.json", function(err, posts) {
-    init(posts)
+    J.setProp('posts', posts.data.children);
+    J.setProp('next', posts.data.after);
+    init();
 })
+
 
 var getHeight = function (offset) {
     var offset = offset || 0;
@@ -24,19 +27,21 @@ var setFilter = function () {
     if ( filter === 'posts' ) {
         $('.post').css('display', 'block');
         $('.postSource').css('display', 'none');
-        console.log('posts');
+        $('#postsFilter').css('background', 'rgb(244, 242, 246)');
+        $('#sourcesFilter').css('background', 'white')
     }
     if ( filter === 'sources' ) {
-        console.log('posts should dispear');
         $('.post').css('display', 'none');
         $('.postSource').css('display', 'block');
-        console.log('sources');
+        $('#sourcesFilter').css('background', 'rgb(244, 242, 246)')
+        $('#postsFilter').css('background', 'white');
+
     }
 }
 
 var init = function (posts) {
 
-    var data = posts.data.children;
+    var data = J.getProp('posts');
 
     data.forEach(function(d) {
         d.data.created *= 1000;
@@ -176,6 +181,26 @@ var init = function (posts) {
 
     })
 
+    $('#fetch').on('click', function () {
+
+        var next = J.getProp('next');
+
+        d3.json("https://www.reddit.com/r/worldnews.json?" + "count=25&after=" + next, function(err, posts) {
+            // d3.json("../posts.json", function(err, posts) {
+            var oldPosts = J.getProp('posts');
+            var newPosts = oldPosts.concat(posts.data.children)
+            J.setProp('posts', newPosts);
+            J.setProp('next', posts.data.after);
+
+            $('#display').html('<svg></svg>')
+            init(); 
+        })
+
+
+    })
+
+
+
     $('#refresh').on('click', function() {
         d3.json("https://www.reddit.com/r/worldnews.json", function(err, posts) {
             init(posts)
@@ -193,6 +218,8 @@ var init = function (posts) {
         J.setProp('filter', 'sources');
         setFilter();
     })
+
+
 }
 
 
