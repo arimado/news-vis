@@ -15,11 +15,12 @@ d3.chart.posts = function() {
 
         rootElement.append("div")
                    .classed("postsContainer", true);
-
+                   
         rootElement.append("div")
                    .classed("sourcesContainer", true);
 
         chart.update();
+
     }
 
     chart.update = function () {

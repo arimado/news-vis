@@ -4,10 +4,23 @@ var brushOffsetTranslate = -50;
 
 d3.json("https://www.reddit.com/r/worldnews.json", function(err, posts) {
 // d3.json("../posts.json", function(err, posts) {
-    J.setProp('posts', posts.data.children);
+
+
+    var currentPosts = posts.data.children;
+
+    J.setProp('posts', timesEachBy1000(posts.data.children));
     J.setProp('next', posts.data.after);
+
     init();
 })
+
+
+var timesEachBy1000 = function (data) {
+    data.forEach(function(d) {
+        d.data.created *= 1000
+    })
+    return data;
+}
 
 
 var getHeight = function (offset) {
@@ -43,9 +56,9 @@ var init = function (posts) {
 
     var data = J.getProp('posts');
 
-    data.forEach(function(d) {
-        d.data.created *= 1000;
-    })
+    // data.forEach(function(d) {
+    //     d.data.created *= 1000;
+    // })
 
     var display = d3.select("#display");
 
@@ -139,7 +152,6 @@ var init = function (posts) {
     // JQUERY stuff ------------------------------------------------------------
 
     $('.dashboard').html($('#dashboard_content').html())
-
     var dashHeight = $('.dashboard').height();
     var postHeight = $('.posts').height();
     $('.posts').height(postHeight - dashHeight);
@@ -185,15 +197,33 @@ var init = function (posts) {
 
         var next = J.getProp('next');
 
-        d3.json("https://www.reddit.com/r/worldnews.json?" + "count=25&after=" + next, function(err, posts) {
+        d3.json("https://www.reddit.com/r/worldnews.json?" + "count=100&after=" + next, function(err, recievedPosts) {
             // d3.json("../posts.json", function(err, posts) {
             var oldPosts = J.getProp('posts');
-            var newPosts = oldPosts.concat(posts.data.children)
-            J.setProp('posts', newPosts);
-            J.setProp('next', posts.data.after);
+            var newPosts = oldPosts.concat(timesEachBy1000(recievedPosts.data.children))
 
-            $('#display').html('<svg></svg>')
-            init(); 
+            J.setProp('posts', newPosts);
+            J.setProp('next', recievedPosts.data.after);
+
+            console.log(newPosts);
+
+            data = J.getProp('posts');
+
+            scatter
+              .data(data)
+              .width(getWidth(chartOffsetWidth))
+              .height(getHeight(scatterOffsetHeight))
+              (scatterGroup);
+
+              brush
+                  .data(data)
+                  .width(getWidth(chartOffsetWidth))
+                  (brushGroup);
+
+              posts.data(data);
+              posts(postsElement);
+
+
         })
 
 
@@ -211,12 +241,14 @@ var init = function (posts) {
         if (J.getProp('filter') === 'posts') return;
         J.setProp('filter', 'posts');
         setFilter();
+        $('.postsContainer').scrollTop(0)
     })
 
     $('#sourcesFilter').on('click', function() {
         if (J.getProp('filter') === 'sources') return;
         J.setProp('filter', 'sources');
         setFilter();
+        $('.postsContainer').scrollTop(0)
     })
 
 
