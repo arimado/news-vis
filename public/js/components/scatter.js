@@ -9,6 +9,8 @@ d3.chart.scatter = function () {
         dispatch = d3.dispatch(chart, "hover"),
         cx = 10;
 
+    var colorScale = d3.scale.category20c();
+
     var chart = function (element) {
         rootElement = element;
 
@@ -68,7 +70,7 @@ d3.chart.scatter = function () {
                 r: function(d, i) { return commentScale(d.data.num_comments) }
             })
             .style("fill", "white")
-            .style("stroke", "black")
+            .style("stroke", function(d, i) { return colorScale(d.data.domain) })
             .style("stroke-width", "2")
             // .style('opacity', function(d) {return commentScale(d.data.num_comments)})
         xAxis(xGroup);
@@ -112,7 +114,7 @@ d3.chart.scatter = function () {
             .interrupt()
             .transition()
             .style("fill", "white")
-            .style("stroke", "black")
+            .style("stroke", function(d, i) { return colorScale(d.data.domain) })
             .style("stroke-width", "2")
 
         var highlights = rootElement.selectAll('.circleHighlight');
@@ -130,19 +132,11 @@ d3.chart.scatter = function () {
 
          selectedCircle.interrupt()
                  .transition()
-                 .style("fill", "red")
+                 .style("fill", "orange")
                  .style("stroke", "none")
                  .style("stroke-width", "2");
 
         var selectedData = highlighted[0].data;
-
-        console.log('selectedCircleNode: ', selectedCircleNode)
-
-
-        console.log('cx:', selectedCircleNode.getAttribute('cx'));
-        console.log('cy:', selectedCircleNode.getAttribute('cy'));
-        console.log('r:', selectedCircleNode.getAttribute('r') + 50);
-
 
         rootElement.insert('ellipse', ":first-child")
                    .classed('circleHighlight', true)
@@ -156,26 +150,8 @@ d3.chart.scatter = function () {
                        ry: selectedCircleNode.getAttribute('r') / 2 * 4,
                        r: selectedCircleNode.getAttribute('r') * 2 + 20,
                    })
-                   .style("stroke", "blue")
+                   .style("stroke", "#ccc")
                    .style("stroke-width", "2");
-
-
-
-
-        /// draw another circle at a particular point
-
-        // highlightedCircle.enter()
-        //                  .append('ellipse')
-        //                  .attr({
-        //                      cx: selected[0][0].getAttribute('cx') ,
-        //                      cy: selected[0][0].getAttribute('cy') ,
-        //                      rx: 10 ,
-        //                      ry: 10 ,
-        //                      r: 20
-        //                  })
-        //                  .style('fill', 'blue');
-
-
 
     }
 

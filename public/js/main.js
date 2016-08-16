@@ -149,9 +149,9 @@ var init = function (posts) {
 
         // resize posts
 
-        var dashHeight = $('.dashboard').height();
-        var postHeight = $('.posts').height();
-        $('.posts').height(postHeight - dashHeight);
+        // var dashHeight = $('.dashboard').height();
+        // var postHeight = $('.posts').height();
+        // $('.posts').height(postHeight - dashHeight);
 
 
 
@@ -164,9 +164,7 @@ $(document).ready(function(){ // -----------------------------------------------
 
 
 $('#refresh').on('click', function() {
-    console.log('what')
     d3.json("https://www.reddit.com/r/worldnews.json", function(err, posts) {
-        console.log(posts);
         init(posts)
     })
 })

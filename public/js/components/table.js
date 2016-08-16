@@ -7,6 +7,9 @@ d3.chart.posts = function() {
         width,
         dispatch = d3.dispatch(chart, "hover");
 
+    var colorScale = d3.scale.category20c();
+
+
     var chart = function (element) {
         rootElement = element;
 
@@ -17,6 +20,8 @@ d3.chart.posts = function() {
     }
 
     chart.update = function () {
+
+        // get all unique values in an array
 
 
         // console.log('update data: ', data);
@@ -80,6 +85,9 @@ d3.chart.posts = function() {
             .append('div')
                 .classed('source', true)
                 .classed('tag', true)
+                .style('background', function (d) {
+                    return colorScale(d.data.domain)
+                })
 
 
         // sourceContainer

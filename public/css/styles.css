@@ -72,7 +72,7 @@ svg {
     text-decoration: none;
 }
 
-.dashboard #fetch a {
+.dashboard ul li a:first-child {
     border-right: 1px solid #ececec;
 }
 
@@ -83,6 +83,20 @@ svg {
 .dashboard #refresh a {
     text-align: center;
 }
+
+.dashboard .filter {
+    width: 50%;
+    text-align: center;
+}
+
+.dashboard #postsFilter a {
+    background-color: rgb(244, 242, 246);
+}
+
+.dashboard #sourcesFilter a {
+
+}
+
 
 /*  POSTS STYLES */
 
