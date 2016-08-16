@@ -106,8 +106,6 @@ d3.chart.scatter = function () {
 
     chart.highlight = function ( highlighted ) {
 
-        console.log(highlighted);
-
         var circles = rootElement.selectAll('circle')
 
         circles
@@ -117,26 +115,49 @@ d3.chart.scatter = function () {
             .style("stroke", "black")
             .style("stroke-width", "2")
 
+        var highlights = rootElement.selectAll('.circleHighlight');
 
-        var selected = circles
-                       .data(highlighted, function(d) { return d.data.id })
-                       .interrupt()
-                       .transition()
-                       .style("fill", "red")
-                       .style("stroke", "none")
-                       .style("stroke-width", "2");
+        if (highlights[0].length > 0) {
+            highlights.remove();
+        }
 
-        
+        if (highlighted.length < 1) return;
 
-        // rootElement.append('ellipse')
-        //            .attr({
-        //                cx: 50,
-        //                cy: 50,
-        //                rx: 20,
-        //                ry: 20,
-        //                r: 40,
-        //            })
-        //            .style('fill', 'blue');
+        var selectedCircle = circles
+                 .data(highlighted, function(d) { return d.data.id });
+
+        var selectedCircleNode = selectedCircle[0][0]
+
+         selectedCircle.interrupt()
+                 .transition()
+                 .style("fill", "red")
+                 .style("stroke", "none")
+                 .style("stroke-width", "2");
+
+        var selectedData = highlighted[0].data;
+
+        console.log('selectedCircleNode: ', selectedCircleNode)
+
+
+        console.log('cx:', selectedCircleNode.getAttribute('cx'));
+        console.log('cy:', selectedCircleNode.getAttribute('cy'));
+        console.log('r:', selectedCircleNode.getAttribute('r') + 50);
+
+
+        rootElement.insert('ellipse', ":first-child")
+                   .classed('circleHighlight', true)
+                   .style("stroke", "white")
+                   .style("fill", "white")
+                   .transition()
+                   .attr({
+                       cx: selectedCircleNode.getAttribute('cx'),
+                       cy: selectedCircleNode.getAttribute('cy'),
+                       rx: selectedCircleNode.getAttribute('r') / 2 * 4,
+                       ry: selectedCircleNode.getAttribute('r') / 2 * 4,
+                       r: selectedCircleNode.getAttribute('r') * 2 + 20,
+                   })
+                   .style("stroke", "blue")
+                   .style("stroke-width", "2");
 
 
 
