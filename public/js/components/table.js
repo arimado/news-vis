@@ -16,6 +16,9 @@ d3.chart.posts = function() {
         rootElement.append("div")
                    .classed("postsContainer", true);
 
+        rootElement.append("div")
+                   .classed("sourcesContainer", true);
+
         chart.update();
     }
 
@@ -31,7 +34,7 @@ d3.chart.posts = function() {
                     .data(data, function (d) { return d.data.id })
         // console.log(posts);
 
-        // RENDER POSTS -------
+        // RENDER POSTS ----------------------------
 
         posts.exit().remove();
 
@@ -89,17 +92,30 @@ d3.chart.posts = function() {
                     return colorScale(d.data.domain)
                 })
 
-
-        // sourceContainer
-        //     .append('i')
-        //     .classed('fa', true)
-        //     .classed('fa-thumbs-up', true)
-
         sourceContainer
             .append('span')
             .text(function (d) { return d.data.domain })
 
 
+        // RENDER SOURCES ----------------------------
+
+        var sourcesContainer = rootElement
+                .select("div.postsContainer")
+                .selectAll("div.postSource")
+                .data(data, function (d) { return d.data.id })
+                .enter();
+
+        var sourceContainer = sourcesContainer
+              .append('div')
+              .classed('postSource', true)
+              .attr({ id: function(d) {  return d.data.id }})
+              .text('child');
+
+        // sourcesContainer
+        //     .append('div')
+        //     .classed('post', true)
+        //     .attr({ id: function(d) {  return d.data.id }})
+        //     .text(function(d) { return d.data.domain })
 
 
         // EVENTS

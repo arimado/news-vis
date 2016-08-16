@@ -1,8 +1,6 @@
-
 var chartOffsetWidth = -20;
 var scatterOffsetHeight = -70;
 var brushOffsetTranslate = -50;
-
 
 d3.json("https://www.reddit.com/r/worldnews.json", function(err, posts) {
 // d3.json("../posts.json", function(err, posts) {
@@ -17,6 +15,23 @@ var getHeight = function (offset) {
 var getWidth = function (offset) {
     var offset = offset || 0;
     return $('.chart').width() + offset;
+}
+
+var setFilter = function () {
+
+    var filter = J.getProp('filter');
+
+    if ( filter === 'posts' ) {
+        $('.post').css('display', 'block');
+        $('.postSource').css('display', 'none');
+        console.log('posts');
+    }
+    if ( filter === 'sources' ) {
+        console.log('posts should dispear');
+        $('.post').css('display', 'none');
+        $('.postSource').css('display', 'block');
+        console.log('sources');
+    }
 }
 
 var init = function (posts) {
@@ -157,17 +172,29 @@ var init = function (posts) {
 
     })
 
+    $('#refresh').on('click', function() {
+        d3.json("https://www.reddit.com/r/worldnews.json", function(err, posts) {
+            init(posts)
+        })
+    })
+
+    $('#postsFilter').on('click', function() {
+        // console.log('posts');
+        if (J.getProp('filter') === 'posts') return;
+        J.setProp('filter', 'posts')
+        setFilter();
+    })
+
+    $('#sourcesFilter').on('click', function() {
+        // console.log('sources')
+        if (J.getProp('filter') === 'sources') return;
+        J.setProp('filter', 'sources')
+        setFilter();
+    })
 }
 
 
 $(document).ready(function(){ // -----------------------------------------------
-
-
-$('#refresh').on('click', function() {
-    d3.json("https://www.reddit.com/r/worldnews.json", function(err, posts) {
-        init(posts)
-    })
-})
 
 
 
