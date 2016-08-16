@@ -123,9 +123,10 @@ d3.chart.scatter = function () {
                        .interrupt()
                        .transition()
                        .style("fill", "red")
-                    //    .style("stroke", "none")
-                    //    .style("stroke-width", "0");
+                       .style("stroke", "none")
+                       .style("stroke-width", "2");
 
+        
 
         // rootElement.append('ellipse')
         //            .attr({
