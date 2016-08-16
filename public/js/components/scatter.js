@@ -115,34 +115,39 @@ d3.chart.scatter = function () {
 
 
         var selected = circles
-                       .data(highlighted,
-                       function(d) { return d.data.id })
-                       .style("fill", "black")
-                       .style("stroke", "none")
-                       .style("stroke-width", "0");
+                       .data(highlighted, function(d) { return d.data.id })
+                       .style("fill", "red")
+                    //    .style("stroke", "none")
+                    //    .style("stroke-width", "0");
 
-        // draw another circle at a particular point
 
-        // if (selected[0][0] !== undefined) {
-        //
-        //     var highlightedCircle = rootElement.selectAll("ellipse")
-        //
-        //
-        //     highlightedCircle.exit().remove()
-        //     highlightedCircle.data([1])
-        //     highlightedCircle.enter()
-        //                      .append('ellipse')
-        //                      .attr({
-        //                          cx: selected[0][0].getAttribute('cx') ,
-        //                          cy: selected[0][0].getAttribute('cy') ,
-        //                          rx: 10 ,
-        //                          ry: 10 ,
-        //                          r: 20
-        //                      })
-        //                      .style('fill', 'blue');
-        //
-        //     // console.log(highlightedCircle);
-        // }
+
+
+        /// draw another circle at a particular point
+
+        if (selected[0][0] !== undefined) {
+
+            var highlightedCircle = rootElement.selectAll("ellipse")
+
+            if (highlightedCircle[0].length < 1) return;
+            
+            highlightedCircle.data([1])
+
+            debugger;
+
+            // highlightedCircle.enter()
+            //                  .append('ellipse')
+            //                  .attr({
+            //                      cx: selected[0][0].getAttribute('cx') ,
+            //                      cy: selected[0][0].getAttribute('cy') ,
+            //                      rx: 10 ,
+            //                      ry: 10 ,
+            //                      r: 20
+            //                  })
+            //                  .style('fill', 'blue');
+
+            console.log(highlightedCircle);
+        }
 
     }
 

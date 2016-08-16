@@ -18,7 +18,7 @@ d3.chart.posts = function() {
 
     chart.update = function () {
 
-    
+
         // console.log('update data: ', data);
         var postsContainer = rootElement.select("div.postsContainer");
         var posts = postsContainer

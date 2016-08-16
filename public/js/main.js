@@ -103,9 +103,15 @@ var init = function (posts) {
 
 
     posts.on('hover', function(hovered) {
-        // console.log('hovered: ', hovered);
+        if (hovered.length < 1) return;
+        console.log('hovered: ', hovered);
         scatter.highlight(hovered);
-        scatter.update();
+        // scatter.update(); //             // why dont you need to update the chart with new data?
+                                            // this is because all update does is upate the DOM
+                                            // the highliight function does the same
+                                            // its not the same as the react virstual dom diffing
+                                            // AHHHHHHHHH NICE!
+        
     })
 
     // JQUERY stuff ------------------------------------------------------------
