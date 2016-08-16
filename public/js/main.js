@@ -109,7 +109,7 @@ var init = function (posts) {
             isScrolling = true;
             $('.postsContainer').scrollTop(0)
             $('.postsContainer').animate({
-                scrollTop: $("#" + hovered[0].data.id).offset().top - 50
+                scrollTop: $("#" + hovered[0].data.id).offset().top - $('.dashboard').height()
             }, 200, function () {
                 isScrolling = false;
             });

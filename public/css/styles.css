@@ -167,10 +167,18 @@ svg {
 
 /* postSouce styles */
 
+.postSource {
+    display: none;
+}
+
 .postSource i {
     margin-right: 20px;
 }
 
 .postsContainer .postSource .title {
     margin-bottom: 0;
+}
+
+.postSource:hover {
+    background-color: rgb(244, 242, 246);
 }

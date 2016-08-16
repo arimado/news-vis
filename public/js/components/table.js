@@ -163,6 +163,7 @@ d3.chart.posts = function() {
 
         sources.on('mouseout', function (d) {
             var node = this;
+            dispatch.sourceHover([]);
         })
 
     }
@@ -176,14 +177,11 @@ d3.chart.posts = function() {
 
         var posts = rootElement.selectAll('.post')
 
-        posts
-            //  .transition()
-             .style("background-color", "white");
+        posts.style("background-color", "white");
 
         posts.data(highlighted, function(d) { return d.data.id })
-            //
             .transition()
-             .style("background-color", "orange");
+            .style("background-color", "orange");
 
     }
 
