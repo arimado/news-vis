@@ -97,25 +97,37 @@ d3.chart.posts = function() {
             .text(function (d) { return d.data.domain })
 
 
-        // RENDER SOURCES ----------------------------
+        // RENDER SOURCES ------------------------------------
+
+        var uniqueSoures = _.uniqBy(data, function(d) {
+            return d.data.domain;
+        });
 
         var sourcesContainer = rootElement
                 .select("div.postsContainer")
                 .selectAll("div.postSource")
-                .data(data, function (d) { return d.data.id })
+                .data(uniqueSoures, function (d) { return d.data.id })
                 .enter();
 
         var sourceContainer = sourcesContainer
-              .append('div')
-              .classed('postSource', true)
-              .attr({ id: function(d) {  return d.data.id }})
+                .append('div')
+                .classed('postSource', true)
+                .attr({ id: function(d) {  return d.data.id }})
 
-        sourceContainer
-          .append('div')
-          .classed('title', true)
-          .append('a')
-              .attr({ href: '#'})
-              .text(function (d) { return d.data.domain })
+        var sourceContent = sourceContainer
+                .append('div')
+                .classed('title', true)
+
+        sourceContent
+                .append('i')
+                .classed('fa', true)
+                .classed('fa-circle', true)
+                .style('color', function (d) { return colorScale(d.data.domain) } )
+
+        sourceContent
+                .append('a')
+                .attr({ href: '#'})
+                .text(function (d) { return d.data.domain })
 
         // sourcesContainer
         //     .append('div')

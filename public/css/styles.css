@@ -164,3 +164,13 @@ svg {
 .postsContainer > div span {
     margin-left: 3px;
 }
+
+/* postSouce styles */
+
+.postSource i {
+    margin-right: 20px;
+}
+
+.postsContainer .postSource .title {
+    margin-bottom: 0;
+}
