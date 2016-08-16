@@ -116,6 +116,10 @@ var init = function (posts) {
         }
     })
 
+    posts.on("sourceHover", function (hovered) {
+        scatter.highlight(hovered);
+    })
+
 
     posts.on('hover', function(hovered) {
         scatter.highlight(hovered);

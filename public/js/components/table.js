@@ -5,7 +5,7 @@ d3.chart.posts = function() {
     var rootElement,
         data,
         width,
-        dispatch = d3.dispatch(chart, "hover");
+        dispatch = d3.dispatch(chart, "hover", "sourceHover");
 
     var colorScale = d3.scale.category20c();
 
@@ -103,11 +103,12 @@ d3.chart.posts = function() {
             return d.data.domain;
         });
 
-        var sourcesContainer = rootElement
+        var sources = rootElement
                 .select("div.postsContainer")
                 .selectAll("div.postSource")
                 .data(uniqueSoures, function (d) { return d.data.id })
-                .enter();
+
+        var sourcesContainer = sources.enter();
 
         var sourceContainer = sourcesContainer
                 .append('div')
@@ -152,6 +153,16 @@ d3.chart.posts = function() {
             d3.select(node)
               .style('background-color', 'white');
             dispatch.hover([]);
+        })
+
+        sources.on('mouseover', function (d) {
+            var node = this;
+            var matchedSources = _.filter(data, function(i) { return i.data.domain === d.data.domain });
+            dispatch.sourceHover(matchedSources);
+        })
+
+        sources.on('mouseout', function (d) {
+            var node = this;
         })
 
     }
