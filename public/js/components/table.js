@@ -21,6 +21,8 @@ d3.chart.posts = function() {
 
         chart.update();
 
+        console.log('table initialised')
+
     }
 
     chart.update = function () {
@@ -105,7 +107,6 @@ d3.chart.posts = function() {
         })
 
         var sourceCounts = uniqueScores.value().map(function(d) {
-            console.log(d.data.domain)
             return {
                 domain: d.data.domain,
                 count: _.countBy(data, function(dC) {
@@ -142,41 +143,45 @@ d3.chart.posts = function() {
                 .text(function (d) { return d.data.domain })
 
         var sourceFreqContainer = sourceContent
-                .append('p')
+                .append('div')
+                .classed('sources', true)
 
-        
+        sourceFreqContainer.each(function(d) {
 
-                // .text(function (d, i) {
-                //
-                //     console.log(d.data.domain);
-                //
-                //     data.forEach(function (dataCheck) {
-                //         if (d.data.domain === dataCheck.data.domain) {
-                //
-                //             // console.log('append --------------')
-                //
-                //             // console.log(d.data.domain)
-                //             // console.log(dataCheck.data.domain)
-                //
-                //
-                //
-                //             // $('#source_' + d.data.id + ' .lols')[0].appendChild(document.createElement('p'))
-                //             //
-                //             // console.log($('#source_' + d.data.id + ' .lols')[0]);
-                //
-                //
-                //
-                //             sourceFreq.append('i')
-                //                       .classed('fa', true)
-                //                       .classed('fa-circle', true)
-                //                       .style('color', 'black' )
-                //                       .text(dataCheck.data.domain);
-                //         }
-                //
-                //     })
-                //
-                //     return '';
-                // })
+            console.log('sourceFreqContainer')
+
+            var node = this;
+
+            console.log('checking data with: ', data.length)
+
+            var stories = data.filter(function(dCheck) {
+                return dCheck.data.domain === d.data.domain
+            })
+
+            console.log('stories found: ', stories)
+
+            stories.forEach(function(story) {
+                d3.select(node).append('i')
+                               .classed('fa', true)
+                               .classed('fa-circle-o', true)
+                               .style('color', function (d) { return colorScale(d.data.domain) } )
+            })
+
+        })
+
+
+
+        // USES DATA WITH D3 API
+
+        // var sourceFreqContainer = sourceContent.selectAll('.sourceContainer')
+        //                                        .data(data, function (d) { return d.data.id})
+        //
+        // console.log()
+        //
+        // var sourceFreq = sourceFreqContainer.enter();
+        //
+        // sourceFreq.append('p')
+        //           .text(function(d) {return d.data.id})
 
 
 
