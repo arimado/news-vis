@@ -154,20 +154,12 @@ d3.chart.posts = function() {
 
         sourceFreqContainer.each(function(d) {
 
-            // console.log('checking for: ', d.data.domain)
-
-            // console.log('sourceFreqContainer')
-
             var node = this;
 
-            // console.log('checking data with: ', data.length)
 
             var stories = data.filter(function(dCheck) {
                 return dCheck.data.domain === d.data.domain
             })
-
-            // console.log('total stories: ', stories.length)
-            // console.log(d.data.domain + ': ', stories)
 
             stories.forEach(function(story) {
                 d3.select(node).append('i')
@@ -175,8 +167,40 @@ d3.chart.posts = function() {
                                .classed('fa-circle-o', true)
                                .style('color', function (d) { return colorScale(d.data.domain) } )
             })
-
         })
+
+        var sourceStatsContainer = sourceFreqContainer
+                .append('div')
+                .classed('sourceStats', true)
+                .text('sourceStatsContainer')
+
+        var sourceScore = sourceStatsContainer
+                .append('div')
+                .classed('sourceScore', true)
+                .text('sourceScore')
+
+        sourceScore.each(function(d){
+            var node = this;
+            var stories = data.filter(function(dCheck) {
+                return dCheck.data.domain === d.data.domain
+            })
+            var totalScore = stories.reduce(function(prev, next) {
+                return prev === 0
+                     ? prev
+                     : prev.data.score + next.data.score
+            }, 0)
+
+            stories.forEach(function(story) {
+                d3.select(node).text(totalScore)
+            })
+        })
+
+        var sourceComments = sourceStatsContainer
+                .append('div')
+                .classed('sourceComments', true)
+                .text('sourceComments')
+
+
 
 
 
