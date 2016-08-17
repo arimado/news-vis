@@ -14,15 +14,17 @@ d3.chart.posts = function() {
     var chart = function (element) {
         rootElement = element;
 
-        rootElement.append("div")
-                   .classed("postsContainer", true);
+        if ($('.postsContainer').length < 1) {
+            rootElement.append("div")
+                       .classed("postsContainer", true);
 
-        rootElement.append("div")
-                   .classed("sourcesContainer", true);
+            rootElement.append("div")
+                       .classed("sourcesContainer", true);
+        }
 
         chart.update();
 
-        console.log('table initialised')
+        // console.log('table initialised')
 
     }
 
@@ -36,6 +38,7 @@ d3.chart.posts = function() {
         var posts = postsContainer
                     .selectAll("div.post")
                     .data(data, function (d) { return d.data.id })
+
         // console.log(posts);
 
         // RENDER POSTS ----------------------------
@@ -124,7 +127,7 @@ d3.chart.posts = function() {
                 .data(data, function (d) { return d.data.domain })
 
         var sourcesContainer = sources.enter();
-        
+
         var sourceContainer = sourcesContainer
                 .append('div')
                 .classed('postSource', true)
@@ -151,7 +154,7 @@ d3.chart.posts = function() {
 
         sourceFreqContainer.each(function(d) {
 
-            console.log('checking for: ', d.data.domain)
+            // console.log('checking for: ', d.data.domain)
 
             // console.log('sourceFreqContainer')
 
