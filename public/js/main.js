@@ -195,48 +195,64 @@ var init = function (posts) {
 
     $('#fetch').on('click', function () {
 
+        if (J.getProp('isFetching')) return;
+
+        J.setProp('isFetching', true);
+        J.setProp('fetchCount', J.getProp('fetchLimit'));
+
+
         $('#fetch a').text('fetching...')
 
-        var next = J.getProp('next');
+        var fetchLoop = function () {
+            if(J.getProp('fetchCount') > 0) {
+                setTimeout(function() {
+
+                    var fetchCount = J.getProp('fetchCount');
+                    var next = J.getProp('next');
+                    d3.json("https://www.reddit.com/r/worldnews.json?" + "count=100&after=" + next, function(err, recievedPosts) {
+                        // d3.json("../posts.json", function(err, posts) {
+                        var oldPosts = J.getProp('posts');
+                        var newPosts = oldPosts.concat(timesEachBy1000(recievedPosts.data.children))
+
+                        J.setProp('posts', newPosts);
+                        J.setProp('next', recievedPosts.data.after);
+
+                        console.log(newPosts);
+                        data = J.getProp('posts');
+
+                        scatter
+                          .data(data)
+                          .width(getWidth(chartOffsetWidth))
+                          .height(getHeight(scatterOffsetHeight))
+                          (scatterGroup);
+
+                          brush
+                              .data(data)
+                              .width(getWidth(chartOffsetWidth))
+                              (brushGroup);
+
+                          posts.data(data);
+                          posts(postsElement);
+
+                        //   $('.dashboard').html($('#dashboard_content').html())
+                        //   var dashHeight = $('.dashboard').height();
+                        //   var postHeight = $('.posts').height();
+                        //   $('.posts').height(postHeight - dashHeight);
+
+                        J.setProp('fetchCount', fetchCount -= 1);
+                        fetchLoop();
+
+                    })
+                }, 1000)
+            } else {
+                $('#fetch a').text('fetch more');
+                J.setProp('isFetching'); 
+            }
+        }
+
+        fetchLoop();
 
 
-        d3.json("https://www.reddit.com/r/worldnews.json?" + "count=100&after=" + next, function(err, recievedPosts) {
-            // d3.json("../posts.json", function(err, posts) {
-            var oldPosts = J.getProp('posts');
-            var newPosts = oldPosts.concat(timesEachBy1000(recievedPosts.data.children))
-
-            J.setProp('posts', newPosts);
-            J.setProp('next', recievedPosts.data.after);
-
-            console.log(newPosts);
-
-            data = J.getProp('posts');
-
-            scatter
-              .data(data)
-              .width(getWidth(chartOffsetWidth))
-              .height(getHeight(scatterOffsetHeight))
-              (scatterGroup);
-
-              brush
-                  .data(data)
-                  .width(getWidth(chartOffsetWidth))
-                  (brushGroup);
-
-              posts.data(data);
-              posts(postsElement);
-
-            //   $('.dashboard').html($('#dashboard_content').html())
-            //   var dashHeight = $('.dashboard').height();
-            //   var postHeight = $('.posts').height();
-            //   $('.posts').height(postHeight - dashHeight);
-
-
-
-            $('#fetch a').text('fetch stories')
-
-
-        })
 
 
     })
@@ -257,16 +273,11 @@ var init = function (posts) {
             $('.postsContainer').scrollTop(0)
         })
 
-
-
-
-
-
         $('#sourcesFilter').on('click', function() {
             if (J.getProp('filter') === 'sources') return;
             J.setProp('filter', 'sources');
             setFilter();
             $('.postsContainer').scrollTop(0)
         })
-    
+
 }
