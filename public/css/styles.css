@@ -171,7 +171,7 @@ svg {
     display: none;
 }
 
-.postSource i {
+.postSource .sourceCircle {
     margin-right: 20px;
 }
 
@@ -186,4 +186,28 @@ svg {
 .sources {
     margin-left: 31px;
     margin-top: 12px;
+}
+
+.sourceStats {
+    overflow: auto;
+    margin-top: 15px;
+}
+
+.postSource .title > i {
+    margin-right: 20px;
+}
+
+.sourceStats > div {
+    width: 50%;
+    float: left;
+    color: grey;
+    font-size: 1.2em;
+}
+
+.sourceStats i {
+    color: #ccc;
+}
+
+.sourceComments {
+    text-align: right;
 }

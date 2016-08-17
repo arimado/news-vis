@@ -201,7 +201,7 @@ var init = function (posts) {
                         J.setProp('next', recievedPosts.data.after);
 
                         console.log(newPosts);
-                        data = J.getProp('posts'); 
+                        data = J.getProp('posts');
 
                         scatter
                           .data(data)
@@ -274,9 +274,7 @@ var init = function (posts) {
     })
 
     $('#fetch').on('click', function () {
-
         fetchPosts();
-
     })
 
 

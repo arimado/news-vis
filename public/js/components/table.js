@@ -165,19 +165,18 @@ d3.chart.posts = function() {
                 d3.select(node).append('i')
                                .classed('fa', true)
                                .classed('fa-circle-o', true)
+                               .classed('sourceCircle', true)
                                .style('color', function (d) { return colorScale(d.data.domain) } )
             })
         })
 
-        var sourceStatsContainer = sourceFreqContainer
+        var sourceStatsContainer = sourceContent
                 .append('div')
                 .classed('sourceStats', true)
-                .text('sourceStatsContainer')
 
         var sourceScore = sourceStatsContainer
                 .append('div')
                 .classed('sourceScore', true)
-                .text('sourceScore')
 
         sourceScore.each(function(d){
             var node = this;
@@ -185,13 +184,10 @@ d3.chart.posts = function() {
                 return dCheck.data.domain === d.data.domain
             })
             var totalScore = stories.reduce(function(prev, next) {
-                return prev === 0
-                     ? prev
-                     : prev.data.score + next.data.score
+                return prev + next.data.score
             }, 0)
-
             stories.forEach(function(story) {
-                d3.select(node).text(totalScore)
+                d3.select(node).html('<i class="fa fa-thumbs-up"></i> <span>' + totalScore + '</span>')
             })
         })
 
@@ -199,6 +195,27 @@ d3.chart.posts = function() {
                 .append('div')
                 .classed('sourceComments', true)
                 .text('sourceComments')
+
+        sourceComments.each(function(d){
+            var node = this;
+            var stories = data.filter(function(dCheck) {
+                return dCheck.data.domain === d.data.domain
+            })
+            var totalComments = stories.reduce(function(prev, next) {
+                return prev + next.data.num_comments
+            }, 0)
+            stories.forEach(function(story) {
+
+                var currentNode = d3.select(node);
+
+                // currentNode.append('i')
+                //            .classed('fa', true)
+                //            .classed('fa-commenting', true);
+
+
+                currentNode.html('<i class="fa fa-commenting"></i> <span>' + totalComments + '</span>')
+            })
+        })
 
 
 
