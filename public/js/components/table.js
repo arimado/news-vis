@@ -15,7 +15,7 @@ d3.chart.posts = function() {
 
         rootElement.append("div")
                    .classed("postsContainer", true);
-                   
+
         rootElement.append("div")
                    .classed("sourcesContainer", true);
 
@@ -100,21 +100,31 @@ d3.chart.posts = function() {
 
         // RENDER SOURCES ------------------------------------
 
-        var uniqueSoures = _.uniqBy(data, function(d) {
+        var uniqueScores =  _.chain(data).uniqBy(function(d) {
             return d.data.domain;
-        });
+        })
+
+        var sourceCounts = uniqueScores.value().map(function(d) {
+            console.log(d.data.domain)
+            return {
+                domain: d.data.domain,
+                count: _.countBy(data, function(dC) {
+                    return dC.data.domain === d.data.domain
+                }).true
+            }
+        })
 
         var sources = rootElement
                 .select("div.postsContainer")
                 .selectAll("div.postSource")
-                .data(uniqueSoures, function (d) { return d.data.id })
+                .data(data, function (d) { return d.data.domain })
 
         var sourcesContainer = sources.enter();
 
         var sourceContainer = sourcesContainer
                 .append('div')
                 .classed('postSource', true)
-                .attr({ id: function(d) {  return d.data.id }})
+                .attr({ id: function(d) {  return 'source_' + d.data.id }});
 
         var sourceContent = sourceContainer
                 .append('div')
@@ -131,14 +141,49 @@ d3.chart.posts = function() {
                 .attr({ href: '#'})
                 .text(function (d) { return d.data.domain })
 
-        // sourcesContainer
-        //     .append('div')
-        //     .classed('post', true)
-        //     .attr({ id: function(d) {  return d.data.id }})
-        //     .text(function(d) { return d.data.domain })
+        var sourceFreqContainer = sourceContent
+                .append('p')
+
+        
+
+                // .text(function (d, i) {
+                //
+                //     console.log(d.data.domain);
+                //
+                //     data.forEach(function (dataCheck) {
+                //         if (d.data.domain === dataCheck.data.domain) {
+                //
+                //             // console.log('append --------------')
+                //
+                //             // console.log(d.data.domain)
+                //             // console.log(dataCheck.data.domain)
+                //
+                //
+                //
+                //             // $('#source_' + d.data.id + ' .lols')[0].appendChild(document.createElement('p'))
+                //             //
+                //             // console.log($('#source_' + d.data.id + ' .lols')[0]);
+                //
+                //
+                //
+                //             sourceFreq.append('i')
+                //                       .classed('fa', true)
+                //                       .classed('fa-circle', true)
+                //                       .style('color', 'black' )
+                //                       .text(dataCheck.data.domain);
+                //         }
+                //
+                //     })
+                //
+                //     return '';
+                // })
 
 
-        // EVENTS
+
+
+
+
+        // EVENTS --------------------------------------------------------------
 
         posts.on('mouseover', function(d) {
             // console.log('mouseover')
