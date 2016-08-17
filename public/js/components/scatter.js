@@ -10,7 +10,7 @@ d3.chart.scatter = function () {
         dispatch = d3.dispatch(chart, "hover"),
         cx = 10;
 
-    var colorScale = d3.scale.category20c();
+    var colorScale = d3.scale.category20();
 
     var chart = function (element) {
         rootElement = element;

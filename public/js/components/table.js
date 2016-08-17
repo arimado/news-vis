@@ -8,7 +8,7 @@ d3.chart.posts = function() {
         dispatch = d3.dispatch(chart, "hover", "sourceHover"),
         deleteSources;
 
-    var colorScale = d3.scale.category20c();
+    var colorScale = d3.scale.category20();
 
 
     var chart = function (element) {
