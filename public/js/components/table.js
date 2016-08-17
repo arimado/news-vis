@@ -5,7 +5,8 @@ d3.chart.posts = function() {
     var rootElement,
         data,
         width,
-        dispatch = d3.dispatch(chart, "hover", "sourceHover");
+        dispatch = d3.dispatch(chart, "hover", "sourceHover"),
+        deleteSources;
 
     var colorScale = d3.scale.category20c();
 
@@ -102,26 +103,28 @@ d3.chart.posts = function() {
 
         // RENDER SOURCES ------------------------------------
 
-        var uniqueScores =  _.chain(data).uniqBy(function(d) {
-            return d.data.domain;
-        })
+        // var uniqueScores =  _.chain(data).uniqBy(function(d) {
+        //     return d.data.domain;
+        // })
+        //
+        // var sourceCounts = uniqueScores.value().map(function(d) {
+        //     return {
+        //         domain: d.data.domain,
+        //         count: _.countBy(data, function(dC) {
+        //             return dC.data.domain === d.data.domain
+        //         }).true
+        //     }
+        // })
 
-        var sourceCounts = uniqueScores.value().map(function(d) {
-            return {
-                domain: d.data.domain,
-                count: _.countBy(data, function(dC) {
-                    return dC.data.domain === d.data.domain
-                }).true
-            }
-        })
+        $('.postSource').remove()
 
         var sources = rootElement
                 .select("div.postsContainer")
-                .selectAll("div.postSource")
+                .selectAll(".postSource")
                 .data(data, function (d) { return d.data.domain })
 
         var sourcesContainer = sources.enter();
-
+        
         var sourceContainer = sourcesContainer
                 .append('div')
                 .classed('postSource', true)
@@ -148,17 +151,20 @@ d3.chart.posts = function() {
 
         sourceFreqContainer.each(function(d) {
 
-            console.log('sourceFreqContainer')
+            console.log('checking for: ', d.data.domain)
+
+            // console.log('sourceFreqContainer')
 
             var node = this;
 
-            console.log('checking data with: ', data.length)
+            // console.log('checking data with: ', data.length)
 
             var stories = data.filter(function(dCheck) {
                 return dCheck.data.domain === d.data.domain
             })
 
-            console.log('stories found: ', stories)
+            // console.log('total stories: ', stories.length)
+            // console.log(d.data.domain + ': ', stories)
 
             stories.forEach(function(story) {
                 d3.select(node).append('i')
