@@ -260,9 +260,12 @@ var init = function (posts) {
         fetchPosts();
     })
 
-
+    $('#exitIntro').on('click', function() {
+        $('#info').fadeOut();
+    })
 
     $('#refresh').on('click', function() {
+        $('#info').fadeIn();
     })
 
 
@@ -273,5 +276,6 @@ var init = function (posts) {
     $('#sourcesFilter').on('click', function() {
         showSources();
     })
+
 
 }
